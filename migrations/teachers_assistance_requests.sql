@@ -3,8 +3,8 @@ CREATE TABLE teachers (
   name VARCHAR(255) NOT NULL,
   start_date DATE,
   end_date DATE,
-  is_active BOOLEAN DEFAULT TRUE,
-)
+  is_active BOOLEAN DEFAULT TRUE
+);
 
 CREATE TABLE assistance_requests (
   assignment_id INTEGER REFERENCES assignments(id) ON DELETE CASCADE,
@@ -15,7 +15,7 @@ CREATE TABLE assistance_requests (
   completed_at TIMESTAMP,
   student_feedback TEXT,
   teacher_feedback TEXT
-)
+);
 
 /* A teacher will have the following attributes:
 
