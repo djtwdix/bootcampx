@@ -12,7 +12,7 @@ CREATE TABLE assistance_requests (
   student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
   teacher_id INTEGER REFERENCES teachers(id) ON DELETE CASCADE,
   created_at TIMESTAMP,
-  stated_at TIMESTAMP,
+  started_at TIMESTAMP,
   completed_at TIMESTAMP,
   student_feedback TEXT,
   teacher_feedback TEXT
