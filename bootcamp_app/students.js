@@ -1,4 +1,4 @@
-const userInput = process.argv.slice(2);
+
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -8,13 +8,18 @@ const pool = new Pool({
   database: 'bootcampx'
 });
 
-pool.query(
-  `SELECT students.id as student_id, students.name as name, cohorts.name as cohort
-   FROM students
-   JOIN cohorts ON cohort_id = cohorts.id
-   WHERE cohorts.name LIKE '${userInput[0]}%'
-   LIMIT ${userInput[1]};`
-)
+const cohort = process.argv[2];
+const limit = process.argv[3];
+
+const values = [`%${cohort}%`, limit];
+
+const queryString = `SELECT students.id as student_id, students.name as name, cohorts.name as cohort 
+                     FROM students
+                     JOIN cohorts ON cohort_id = cohorts.id
+                     WHERE cohorts.name LIKE $1
+                     LIMIT $2`
+
+pool.query(queryString, values)
   .then(res => {
     const info = res.rows;
     info.forEach(user => {
